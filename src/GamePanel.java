@@ -152,7 +152,7 @@ public class GamePanel extends JPanel implements ActionListener{
         restart.setVisible(true);
         restart.setText("Restart");
         frame.add(restart);
-        frame.setVisible(false);
+        frame.setVisible(true);
     }
     @Override
     public void actionPerformed(ActionEvent e) {
