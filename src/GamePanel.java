@@ -64,12 +64,13 @@ public class GamePanel extends JPanel implements ActionListener{
         }
         else {
             gameOver(g);
+
         }
     }
     public void newApple(){
 
-        appleX = random.nextInt((int)SCREEN_WIDTH/UNIT_SIZE)*UNIT_SIZE;
-        appleY = random.nextInt((int)SCREEN_HEIGHT/UNIT_SIZE)*UNIT_SIZE;
+        appleX = random.nextInt(SCREEN_WIDTH /UNIT_SIZE)*UNIT_SIZE;
+        appleY = random.nextInt(SCREEN_HEIGHT/UNIT_SIZE)*UNIT_SIZE;
 
     }
     public void move(){
@@ -105,8 +106,9 @@ public class GamePanel extends JPanel implements ActionListener{
     public void checkCollisions(){
         //checks if head collides with body
         for(int i = bodyParts; i > 0; i--) {
-            if((x[0] == x[i])&& (y[0] == y[i])) {
+            if ((x[0] == x[i]) && (y[0] == y[i])) {
                 running = false;
+                break;
             }
         }
         //checks if head touches left border
@@ -141,7 +143,16 @@ public class GamePanel extends JPanel implements ActionListener{
         g.setFont(new Font("Ink Free", Font.BOLD, 75));
         FontMetrics metrics2 = getFontMetrics(g.getFont());
         g.drawString("Game Over", (SCREEN_WIDTH - metrics2.stringWidth("Game Over"))/2, SCREEN_HEIGHT/2);
-
+        JButton restart = new JButton("Restart") {{
+            addActionListener(OnClick -> startGame());
+        }};
+        JFrame frame = new JFrame();
+        frame.setSize(200,200);
+        restart.setSize(400,400);
+        restart.setVisible(true);
+        restart.setText("Restart");
+        frame.add(restart);
+        frame.setVisible(true);
     }
     @Override
     public void actionPerformed(ActionEvent e) {
@@ -178,7 +189,6 @@ public class GamePanel extends JPanel implements ActionListener{
                     }
                     break;
             }
-
         }
     }
 }
